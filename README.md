@@ -25,4 +25,4 @@ You can sort the results in the following orders:
 - Popularity of source
 - Social shares (Coming soon!)
 
-You need an API key to use the API - this is a unique key that identifies your requests. They're free for development, open-source, and non-commercial use. You can get one here: [https://newsapi.com](https://newsapi.org).
+You need an API key to use the API - this is a unique key that identifies your requests. They're free for development, open-source, and non-commercial use. You can get one here: [https://newsapi.org](https://newsapi.org).
