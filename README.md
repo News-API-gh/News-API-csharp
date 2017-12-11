@@ -1,6 +1,8 @@
 # News API SDK for .NET (C#)
 Coming soon... this is where our officially supported SDK for C# is going to live.
 
+***
+
 News API is a simple HTTP REST API for searching and retrieving live articles from all over the web. It can help you answer questions like:
 
 - What top stories is the NY Times running right now?
