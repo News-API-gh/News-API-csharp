@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -66,6 +67,18 @@ namespace NewsAPI
             if (request.Country.HasValue)
             {
                 queryParams.Add("country=" + request.Country.Value.ToString().ToLowerInvariant());
+            }
+
+            // page
+            if (request.Page > 1)
+            {
+                queryParams.Add("page=" + request.Page);
+            }
+
+            // page size
+            if (request.PageSize > 0)
+            {
+                queryParams.Add("pageSize=" + request.PageSize);
             }
 
             // join them together
@@ -142,6 +155,12 @@ namespace NewsAPI
                 queryParams.Add("page=" + request.Page);
             }
 
+            // page size
+            if (request.PageSize > 0)
+            {
+                queryParams.Add("pageSize=" + request.PageSize);
+            }
+
             // join them together
             var querystring = string.Join("&", queryParams.ToArray());
 
@@ -183,9 +202,19 @@ namespace NewsAPI
                 }
                 else
                 {
+                    ErrorCodes errorCode = ErrorCodes.UnknownError;
+                    try
+                    {
+                        errorCode = (ErrorCodes)apiResponse.Code;
+                    }
+                    catch (Exception)
+                    {
+                        Debug.WriteLine("The API returned an error code that wasn't expected: " + apiResponse.Code);
+                    }
+
                     articlesResult.Error = new Error
                     {
-                        Code = (ErrorCodes)apiResponse.Code,
+                        Code = errorCode,
                         Message = apiResponse.Message
                     };
                 }

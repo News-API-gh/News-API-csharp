@@ -39,6 +39,10 @@ namespace NewsAPI.Models
         /// <summary>
         /// Each request returns a fixed amount of results. Page through them by increasing this.
         /// </summary>
-        public int Page = 1;
+        public int Page { get; set; }
+        /// <summary>
+        /// Set the max number of results to retrieve per request. The max is 100.
+        /// </summary>
+        public int PageSize { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace NewsAPI.Models
         SourceTemporarilyUnavailable,
         UnexpectedError,
         ParameterInvalid,
-        RequestTimeout
+        RequestTimeout,
+        UnknownError
     }
 }

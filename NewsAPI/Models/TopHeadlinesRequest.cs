@@ -28,5 +28,13 @@ namespace NewsAPI.Models
         /// The country of the source to restrict articles to.
         /// </summary>
         public Countries? Country { get; set; }
+        /// <summary>
+        /// Each request returns a fixed amount of results. Page through them by increasing this.
+        /// </summary>
+        public int Page { get; set; }
+        /// <summary>
+        /// Set the max number of results to retrieve per request. The max is 100.
+        /// </summary>
+        public int PageSize { get; set; }
     }
 }

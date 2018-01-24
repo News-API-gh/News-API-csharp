@@ -38,16 +38,16 @@
     <Compile Include="Models\ApiResponse.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticlesResult.cs" />
-    <Compile Include="Models\Categories.cs" />
-    <Compile Include="Models\Countries.cs" />
+    <Compile Include="Constants\Categories.cs" />
+    <Compile Include="Constants\Countries.cs" />
     <Compile Include="Models\Error.cs" />
-    <Compile Include="Models\ErrorCodes.cs" />
+    <Compile Include="Constants\ErrorCodes.cs" />
     <Compile Include="Models\TopHeadlinesRequest.cs" />
     <Compile Include="Models\EverythingRequest.cs" />
-    <Compile Include="Models\Languages.cs" />
-    <Compile Include="Models\SortBys.cs" />
+    <Compile Include="Constants\Languages.cs" />
+    <Compile Include="Constants\SortBys.cs" />
     <Compile Include="Models\Source.cs" />
-    <Compile Include="Models\Statuses.cs" />
+    <Compile Include="Constants\Statuses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +59,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
