@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>NewsAPI</id>
+    <version>0.1</version>
+    <authors>News API</authors>
+    <owners>News API</owners>
+    <licenseUrl>https://github.com/News-API-gh/News-API-csharp/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/News-API-gh/News-API-csharp</projectUrl>
+    <iconUrl>https://github.com/News-API-gh/News-API-csharp/raw/master/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Official C# client library for News API (newsapi.org). Search for live news all over the web.</description>
+    <releaseNotes>Init.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>News API, newsapi, news</tags>
+  </metadata>
+</package>
