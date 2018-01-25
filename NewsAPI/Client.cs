@@ -37,7 +37,7 @@ namespace NewsAPI
         /// </summary>
         /// <param name="request">The params and filters for the request.</param>
         /// <returns></returns>
-        public async Task<ArticlesResult> TopHeadlinesAsync(TopHeadlinesRequest request)
+        public async Task<ArticlesResult> GetTopHeadlinesAsync(TopHeadlinesRequest request)
         {
             // build the querystring
             var queryParams = new List<string>();
@@ -92,9 +92,9 @@ namespace NewsAPI
         /// </summary>
         /// <param name="request">The params and filters for the request.</param>
         /// <returns></returns>
-        public ArticlesResult TopHeadlines(TopHeadlinesRequest request)
+        public ArticlesResult GetTopHeadlines(TopHeadlinesRequest request)
         {
-            return TopHeadlinesAsync(request).Result;
+            return GetTopHeadlinesAsync(request).Result;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace NewsAPI
         /// </summary>
         /// <param name="request">The params and filters for the request.</param>
         /// <returns></returns>
-        public async Task<ArticlesResult> EverythingAsync(EverythingRequest request)
+        public async Task<ArticlesResult> GetEverythingAsync(EverythingRequest request)
         {
             // build the querystring
             var queryParams = new List<string>();
@@ -173,9 +173,9 @@ namespace NewsAPI
         /// <param name="request">The params and filters for the request.</param>
         /// <param name="noCache">By default we cache your results for 5 minutes so that if you make an identical request shortly after the first we serve the cached result without hitting your request quota. To disable this and always retrieve the freshest data set this to true.</param>
         /// <returns></returns>
-        public ArticlesResult Everything(EverythingRequest request)
+        public ArticlesResult GetEverything(EverythingRequest request)
         {
-            return EverythingAsync(request).Result;
+            return GetEverythingAsync(request).Result;
         }
 
         // ***

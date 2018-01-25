@@ -28,7 +28,7 @@ namespace NewsAPI.Tests
                 Q = "bitcoin"
             };
 
-            var result = NewsApiClient.Everything(everythingRequest);
+            var result = NewsApiClient.GetEverything(everythingRequest);
 
             Assert.AreEqual(Statuses.Ok, result.Status);
             Assert.IsTrue(result.TotalResults > 0);
@@ -46,7 +46,7 @@ namespace NewsAPI.Tests
 
             var brokenClient = new Client("nokey");
 
-            var result = brokenClient.Everything(everythingRequest);
+            var result = brokenClient.GetEverything(everythingRequest);
 
             Assert.AreEqual(Statuses.Error, result.Status);
             Assert.IsNull(result.Articles);
@@ -61,7 +61,7 @@ namespace NewsAPI.Tests
 
             topHeadlinesRequest.Sources.Add("techcrunch");
 
-            var result = NewsApiClient.TopHeadlines(topHeadlinesRequest);
+            var result = NewsApiClient.GetTopHeadlines(topHeadlinesRequest);
 
             Assert.AreEqual(Statuses.Ok, result.Status);
             Assert.IsTrue(result.TotalResults > 0);
@@ -78,7 +78,7 @@ namespace NewsAPI.Tests
 
             topHeadlinesRequest.Sources.Add("techcrunch");
 
-            var result = brokenClient.TopHeadlines(topHeadlinesRequest);
+            var result = brokenClient.GetTopHeadlines(topHeadlinesRequest);
 
             Assert.AreEqual(Statuses.Error, result.Status);
             Assert.IsNull(result.Articles);
