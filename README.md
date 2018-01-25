@@ -39,7 +39,7 @@ namespace MyApplication
     {
         static void Main(string[] args)
         {
-          // init with your API key (get this from newsapi.org)
+            // init with your API key (get this from newsapi.org)
             var newsApiClient = new NewsApiClient("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
             var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
