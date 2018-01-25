@@ -32,6 +32,7 @@ PM> Install-Package NewsAPI
 using NewsAPI;
 using NewsAPI.Models;
 using NewsAPI.Constants;
+using System;
 
 namespace MyApplication
 {
