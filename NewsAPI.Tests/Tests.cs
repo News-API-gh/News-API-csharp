@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewsAPI.Models;
 using System.Configuration;
+using NewsAPI.Constants;
 
 namespace NewsAPI.Tests
 {
@@ -10,14 +11,14 @@ namespace NewsAPI.Tests
     {
         // FIRST: Set your API key in the config file
 
-        private Client NewsApiClient;
+        private NewsApiClient NewsApiClient;
 
         [TestInitialize]
         public void Init()
         {
             // set this
             var apiKey = Environment.GetEnvironmentVariable("NewsAPIKey");
-            NewsApiClient = new Client(apiKey);
+            NewsApiClient = new NewsApiClient(apiKey);
         }
 
         [TestMethod]
@@ -37,6 +38,24 @@ namespace NewsAPI.Tests
         }
 
         [TestMethod]
+        public void ComplexEverythingRequestWorks()
+        {
+            var everythingRequest = new EverythingRequest
+            {
+                Q = "apple",
+                SortBy = SortBys.PublishedAt,
+                Language = Languages.EN
+            };
+
+            var result = NewsApiClient.GetEverything(everythingRequest);
+
+            Assert.AreEqual(Statuses.Ok, result.Status);
+            Assert.IsTrue(result.TotalResults > 0);
+            Assert.IsTrue(result.Articles.Count > 0);
+            Assert.IsNull(result.Error);
+        }
+
+        [TestMethod]
         public void BadEverythingRequestReturnsError()
         {
             var everythingRequest = new EverythingRequest
@@ -44,7 +63,7 @@ namespace NewsAPI.Tests
                 Q = "bitcoin"
             };
 
-            var brokenClient = new Client("nokey");
+            var brokenClient = new NewsApiClient("nokey");
 
             var result = brokenClient.GetEverything(everythingRequest);
 
@@ -74,7 +93,7 @@ namespace NewsAPI.Tests
         {
             var topHeadlinesRequest = new TopHeadlinesRequest();
 
-            var brokenClient = new Client("nokey");
+            var brokenClient = new NewsApiClient("nokey");
 
             topHeadlinesRequest.Sources.Add("techcrunch");
 

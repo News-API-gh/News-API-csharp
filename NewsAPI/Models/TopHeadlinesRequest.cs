@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NewsAPI.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace NewsAPI.Models
 {
+    /// <summary>
+    /// Params for making a request to the /top-headlines endpoint.
+    /// </summary>
     public class TopHeadlinesRequest
     {
         /// <summary>

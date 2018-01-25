@@ -1,4 +1,5 @@
-﻿using NewsAPI.Models;
+﻿using NewsAPI.Constants;
+using NewsAPI.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,10 @@ using System.Threading.Tasks;
 
 namespace NewsAPI
 {
-    public class Client
+    /// <summary>
+    /// Use this to get results from NewsAPI.org.
+    /// </summary>
+    public class NewsApiClient
     {
         private string BASE_URL = "https://newsapi.org/v2/";
 
@@ -23,7 +27,7 @@ namespace NewsAPI
         /// Use this to get results from NewsAPI.org.
         /// </summary>
         /// <param name="apiKey">Your News API key. You can create one for free at https://newsapi.org.</param>
-        public Client(string apiKey)
+        public NewsApiClient(string apiKey)
         {
             ApiKey = apiKey;
 
@@ -140,7 +144,7 @@ namespace NewsAPI
             // language
             if (request.Language.HasValue)
             {
-                queryParams.Add("language=" + request.Language.Value.ToString());
+                queryParams.Add("language=" + request.Language.Value.ToString().ToLowerInvariant());
             }
 
             // sortBy
@@ -171,7 +175,6 @@ namespace NewsAPI
         /// Query the /v2/everything endpoint for recent articles all over the web.
         /// </summary>
         /// <param name="request">The params and filters for the request.</param>
-        /// <param name="noCache">By default we cache your results for 5 minutes so that if you make an identical request shortly after the first we serve the cached result without hitting your request quota. To disable this and always retrieve the freshest data set this to true.</param>
         /// <returns></returns>
         public ArticlesResult GetEverything(EverythingRequest request)
         {

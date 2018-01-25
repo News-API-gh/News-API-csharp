@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsAPI.Models
+namespace NewsAPI.Constants
 {
     [JsonConverter(typeof(StringEnumConverter))]
     public enum Categories

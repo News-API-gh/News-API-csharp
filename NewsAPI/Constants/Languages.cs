@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewsAPI.Models
+namespace NewsAPI.Constants
 {
     public enum Languages
     {
+        /// <summary>
+        /// Afrikaans (South Africa)
+        /// </summary>
         AF,
         AN,
         AR,
@@ -20,10 +23,19 @@ namespace NewsAPI.Models
         CS,
         CY,
         DA,
+        /// <summary>
+        /// German
+        /// </summary>
         DE,
         EL,
+        /// <summary>
+        /// English
+        /// </summary>
         EN,
         EO,
+        /// <summary>
+        /// Spanish
+        /// </summary>
         ES,
         ET,
         EU,
@@ -39,7 +51,13 @@ namespace NewsAPI.Models
         HY,
         ID,
         IS,
+        /// <summary>
+        /// Italian
+        /// </summary>
         IT,
+        /// <summary>
+        /// Japanese
+        /// </summary>
         JP,
         JV,
         KK,
@@ -53,11 +71,17 @@ namespace NewsAPI.Models
         ML,
         MR,
         MS,
+        /// <summary>
+        /// Dutch
+        /// </summary>
         NL,
         NN,
         NO,
         OC,
         PL,
+        /// <summary>
+        /// Portuguese
+        /// </summary>
         PT,
         RO,
         RU,
@@ -77,6 +101,9 @@ namespace NewsAPI.Models
         UR,
         VI,
         VO,
+        /// <summary>
+        /// Chinese
+        /// </summary>
         ZH
     }
 }
