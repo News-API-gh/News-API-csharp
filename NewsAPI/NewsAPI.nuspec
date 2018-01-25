@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>NewsAPI</id>
-    <version>0.2</version>
+    <version>0.4</version>
     <authors>News API</authors>
     <owners>News API</owners>
     <licenseUrl>https://github.com/News-API-gh/News-API-csharp/blob/master/LICENSE</licenseUrl>

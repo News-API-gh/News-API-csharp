@@ -11,7 +11,7 @@ namespace NewsAPI.Constants
         /// <summary>
         /// Sort by publisher popularity
         /// </summary>
-        Publisher,
+        Popularity,
         /// <summary>
         /// Sort by article publish date (newest first)
         /// </summary>
