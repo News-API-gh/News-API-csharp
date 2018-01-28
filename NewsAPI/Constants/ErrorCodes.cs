@@ -12,15 +12,16 @@ namespace NewsAPI.Constants
         ApiKeyMissing,
         ApiKeyInvalid,
         ApiKeyDisabled,
-        RateLimited,
         ParametersMissing,
+        ParametersIncompatible,
+        ParameterInvalid,
+        RateLimited,
+        RequestTimeout,
         SourcesTooMany,
         SourceDoesNotExist,
         SourceUnavailableSortedBy,
         SourceTemporarilyUnavailable,
         UnexpectedError,
-        ParameterInvalid,
-        RequestTimeout,
         UnknownError
     }
 }

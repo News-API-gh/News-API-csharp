@@ -104,5 +104,22 @@ namespace NewsAPI.Tests
             Assert.IsNotNull(result.Error);
             Assert.AreEqual(ErrorCodes.ApiKeyInvalid, result.Error.Code);
         }
+
+        [TestMethod]
+        public void BadTopHeadlinesRequestReturnsError2()
+        {
+            var topHeadlinesRequest = new TopHeadlinesRequest();
+
+            topHeadlinesRequest.Sources.Add("techcrunch");
+            topHeadlinesRequest.Country = Countries.AU;
+            topHeadlinesRequest.Language = Languages.EN;
+
+            var result = NewsApiClient.GetTopHeadlines(topHeadlinesRequest);
+
+            Assert.AreEqual(Statuses.Error, result.Status);
+            Assert.IsNull(result.Articles);
+            Assert.IsNotNull(result.Error);
+            Assert.AreEqual(ErrorCodes.ParametersIncompatible, result.Error.Code);
+        }
     }
 }
