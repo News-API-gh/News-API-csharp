@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewsAPI.Models;
-using System.Configuration;
 using NewsAPI.Constants;
 
 namespace NewsAPI.Tests
@@ -27,6 +27,22 @@ namespace NewsAPI.Tests
             var everythingRequest = new EverythingRequest
             {
                 Q = "bitcoin"
+            };
+
+            var result = NewsApiClient.GetEverything(everythingRequest);
+
+            Assert.AreEqual(Statuses.Ok, result.Status);
+            Assert.IsTrue(result.TotalResults > 0);
+            Assert.IsTrue(result.Articles.Count > 0);
+            Assert.IsNull(result.Error);
+        }
+
+        [TestMethod]
+        public void EverythingRequestWithDomainsWorks()
+        {
+            var everythingRequest = new EverythingRequest
+            {
+                Domains = new List<String>(new []{ "wsj.com", "nytimes.com" })
             };
 
             var result = NewsApiClient.GetEverything(everythingRequest);
