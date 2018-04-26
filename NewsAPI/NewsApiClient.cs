@@ -4,10 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NewsAPI
@@ -126,7 +124,7 @@ namespace NewsAPI
             // domains
             if (request.Domains.Count > 0)
             {
-                queryParams.Add("domains=" + string.Join(",", request.Sources));
+                queryParams.Add("domains=" + string.Join(",", request.Domains));
             }
 
             // from
