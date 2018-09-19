@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NewsAPI.Constants
+﻿namespace NewsAPI.Constants
 {
     public enum Languages
     {
         /// <summary>
-        /// Afrikaans (South Africa)
+        ///     Afrikaans (South Africa)
         /// </summary>
         AF,
         AN,
@@ -23,18 +17,21 @@ namespace NewsAPI.Constants
         CS,
         CY,
         DA,
+
         /// <summary>
-        /// German
+        ///     German
         /// </summary>
         DE,
         EL,
+
         /// <summary>
-        /// English
+        ///     English
         /// </summary>
         EN,
         EO,
+
         /// <summary>
-        /// Spanish
+        ///     Spanish
         /// </summary>
         ES,
         ET,
@@ -51,12 +48,14 @@ namespace NewsAPI.Constants
         HY,
         ID,
         IS,
+
         /// <summary>
-        /// Italian
+        ///     Italian
         /// </summary>
         IT,
+
         /// <summary>
-        /// Japanese
+        ///     Japanese
         /// </summary>
         JP,
         JV,
@@ -71,16 +70,18 @@ namespace NewsAPI.Constants
         ML,
         MR,
         MS,
+
         /// <summary>
-        /// Dutch
+        ///     Dutch
         /// </summary>
         NL,
         NN,
         NO,
         OC,
         PL,
+
         /// <summary>
-        /// Portuguese
+        ///     Portuguese
         /// </summary>
         PT,
         RO,
@@ -101,8 +102,9 @@ namespace NewsAPI.Constants
         UR,
         VI,
         VO,
+
         /// <summary>
-        /// Chinese
+        ///     Chinese
         /// </summary>
         ZH
     }
