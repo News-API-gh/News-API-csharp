@@ -108,9 +108,9 @@ namespace NewsAPI
             }
 
             // join them together
-            var querystring = string.Join("&", queryParams.ToArray());
+            var queryString = string.Join("&", queryParams.ToArray());
 
-            return await MakeRequest("everything", querystring);
+            return await MakeRequest("everything", queryString).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -173,9 +173,9 @@ namespace NewsAPI
             }
 
             // join them together
-            var querystring = string.Join("&", queryParams.ToArray());
+            var queryString = string.Join("&", queryParams.ToArray());
 
-            return await MakeRequest("top-headlines", querystring).ConfigureAwait(false);
+            return await MakeRequest("top-headlines", queryString).ConfigureAwait(false);
         }
 
         // ***
