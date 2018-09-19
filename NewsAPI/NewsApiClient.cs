@@ -68,7 +68,7 @@ namespace NewsAPI
             // domains
             if (request.Domains.Count > 0)
             {
-                queryParams.Add("domains=" + string.Join(",", request.Sources));
+                queryParams.Add("domains=" + string.Join(",", request.Domains));
             }
 
             // from
