@@ -1,125 +1,143 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NewsAPI.Constants
+﻿namespace NewsAPI.Constants
 {
     public enum Countries
     {
         AE,
+
         /// <summary>
-        /// Argentina
+        ///     Argentina
         /// </summary>
         AR,
+
         /// <summary>
-        /// Austria
+        ///     Austria
         /// </summary>
         AT,
+
         /// <summary>
-        /// Australia
+        ///     Australia
         /// </summary>
         AU,
+
         /// <summary>
-        /// Belgium
+        ///     Belgium
         /// </summary>
         BE,
         BG,
         BR,
+
         /// <summary>
-        /// Canada
+        ///     Canada
         /// </summary>
         CA,
         CH,
+
         /// <summary>
-        /// China
+        ///     China
         /// </summary>
         CN,
         CO,
         CU,
+
         /// <summary>
-        /// Czech Republic
+        ///     Czech Republic
         /// </summary>
         CZ,
+
         /// <summary>
-        /// Germany
+        ///     Germany
         /// </summary>
         DE,
+
         /// <summary>
-        /// Egypt
+        ///     Egypt
         /// </summary>
         EG,
+
         /// <summary>
-        /// France
+        ///     France
         /// </summary>
         FR,
+
         /// <summary>
-        /// United Kingdom
+        ///     United Kingdom
         /// </summary>
         GB,
+
         /// <summary>
-        /// Greece
+        ///     Greece
         /// </summary>
         GR,
+
         /// <summary>
-        /// Hong Kong
+        ///     Hong Kong
         /// </summary>
         HK,
+
         /// <summary>
-        /// Hungary
+        ///     Hungary
         /// </summary>
         HU,
         ID,
+
         /// <summary>
-        /// Ireland
+        ///     Ireland
         /// </summary>
         IE,
         IL,
         IN,
+
         /// <summary>
-        /// Italy
+        ///     Italy
         /// </summary>
         IT,
+
         /// <summary>
-        /// Japan
+        ///     Japan
         /// </summary>
         JP,
+
         /// <summary>
-        /// South Korea
+        ///     South Korea
         /// </summary>
         KR,
         LT,
         LV,
         MA,
+
         /// <summary>
-        /// Mexico
+        ///     Mexico
         /// </summary>
         MX,
         MY,
         NG,
+
         /// <summary>
-        /// Netherlands
+        ///     Netherlands
         /// </summary>
         NL,
+
         /// <summary>
-        /// Norway
+        ///     Norway
         /// </summary>
         NO,
+
         /// <summary>
-        /// New Zealand
+        ///     New Zealand
         /// </summary>
         NZ,
         PH,
         PL,
+
         /// <summary>
-        /// Portugal
+        ///     Portugal
         /// </summary>
         PT,
         RO,
         RS,
+
         /// <summary>
-        /// Russia
+        ///     Russia
         /// </summary>
         RU,
         SA,
@@ -131,8 +149,9 @@ namespace NewsAPI.Constants
         TR,
         TW,
         UA,
+
         /// <summary>
-        /// United States
+        ///     United States
         /// </summary>
         US,
         VE,

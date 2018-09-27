@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewsAPI.Models;
 using System.Configuration;
@@ -19,6 +20,20 @@ namespace NewsAPI.Tests
             // set this
             var apiKey = Environment.GetEnvironmentVariable("NewsAPIKey");
             NewsApiClient = new NewsApiClient(apiKey);
+        }
+
+        [TestMethod]
+        public void EverythingRequestWithDomainsWorks()
+        {
+            var everythingRequest = new EverythingRequest
+            {
+                Domains = new List<string>(new[] { "wsj.com", "nytimes.com" })
+            };
+            var result = NewsApiClient.GetEverything(everythingRequest);
+            Assert.AreEqual(Statuses.Ok, result.Status);
+            Assert.IsTrue(result.TotalResults > 0);
+            Assert.IsTrue(result.Articles.Count > 0);
+            Assert.IsNull(result.Error);
         }
 
         [TestMethod]

@@ -1,49 +1,136 @@
-﻿using NewsAPI.Constants;
-using NewsAPI.Models;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using NewsAPI.Constants;
+using NewsAPI.Models;
+using Newtonsoft.Json;
 
 namespace NewsAPI
 {
     /// <summary>
-    /// Use this to get results from NewsAPI.org.
+    ///     Use this to get results from NewsAPI.org.
     /// </summary>
     public class NewsApiClient
     {
-        private string BASE_URL = "https://newsapi.org/v2/";
+        private const string BaseUrl = "https://newsapi.org/v2/";
 
-        private HttpClient HttpClient;
-
-        private string ApiKey;
+        private readonly HttpClient _httpClient;
 
         /// <summary>
-        /// Use this to get results from NewsAPI.org.
+        ///     Use this to get results from NewsAPI.org.
         /// </summary>
         /// <param name="apiKey">Your News API key. You can create one for free at https://newsapi.org.</param>
         public NewsApiClient(string apiKey)
         {
-            ApiKey = apiKey;
-
-            HttpClient = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
-            HttpClient.DefaultRequestHeaders.Add("user-agent", "News-API-csharp/0.1");
-            HttpClient.DefaultRequestHeaders.Add("x-api-key", ApiKey);
+            _httpClient = new HttpClient(new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            });
+            _httpClient.DefaultRequestHeaders.Add("user-agent", "News-API-csharp/0.1");
+            _httpClient.DefaultRequestHeaders.Add("x-api-key", apiKey);
         }
 
         /// <summary>
-        /// Query the /v2/top-headlines endpoint for live top news headlines.
+        ///     Query the /v2/everything endpoint for recent articles all over the web.
+        /// </summary>
+        /// <param name="request">The params and filters for the request.</param>
+        /// <returns></returns>
+        public ArticlesResult GetEverything(EverythingRequest request)
+        {
+            return GetEverythingAsync(request).Result;
+        }
+
+        /// <summary>
+        ///     Query the /v2/everything endpoint for recent articles all over the web.
+        /// </summary>
+        /// <param name="request">The params and filters for the request.</param>
+        /// <returns></returns>
+        public async Task<ArticlesResult> GetEverythingAsync(EverythingRequest request)
+        {
+            // build the queryString
+            var queryParams = new List<string>();
+
+            // q
+            if (!string.IsNullOrWhiteSpace(request.Q))
+            {
+                queryParams.Add("q=" + request.Q);
+            }
+
+            // sources
+            if (request.Sources.Count > 0)
+            {
+                queryParams.Add("sources=" + string.Join(",", request.Sources));
+            }
+
+            // domains
+            if (request.Domains.Count > 0)
+            {
+                queryParams.Add("domains=" + string.Join(",", request.Domains));
+            }
+
+            // from
+            if (request.From.HasValue)
+            {
+                queryParams.Add("from=" + string.Format("{0:s}", request.From.Value));
+            }
+
+            // to
+            if (request.To.HasValue)
+            {
+                queryParams.Add("to=" + string.Format("{0:s}", request.To.Value));
+            }
+
+            // language
+            if (request.Language.HasValue)
+            {
+                queryParams.Add("language=" + request.Language.Value.ToString().ToLowerInvariant());
+            }
+
+            // sortBy
+            if (request.SortBy.HasValue)
+            {
+                queryParams.Add("sortBy=" + request.SortBy.Value);
+            }
+
+            // page
+            if (request.Page > 1)
+            {
+                queryParams.Add("page=" + request.Page);
+            }
+
+            // page size
+            if (request.PageSize > 0)
+            {
+                queryParams.Add("pageSize=" + request.PageSize);
+            }
+
+            // join them together
+            var queryString = string.Join("&", queryParams.ToArray());
+
+            return await MakeRequest("everything", queryString).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        ///     Query the /v2/top-headlines endpoint for live top news headlines.
+        /// </summary>
+        /// <param name="request">The params and filters for the request.</param>
+        /// <returns></returns>
+        public ArticlesResult GetTopHeadlines(TopHeadlinesRequest request)
+        {
+            return GetTopHeadlinesAsync(request).Result;
+        }
+
+        /// <summary>
+        ///     Query the /v2/top-headlines endpoint for live top news headlines.
         /// </summary>
         /// <param name="request">The params and filters for the request.</param>
         /// <returns></returns>
         public async Task<ArticlesResult> GetTopHeadlinesAsync(TopHeadlinesRequest request)
         {
-            // build the querystring
+            // build the queryString
             var queryParams = new List<string>();
 
             // q
@@ -86,150 +173,69 @@ namespace NewsAPI
             }
 
             // join them together
-            var querystring = string.Join("&", queryParams.ToArray());
+            var queryString = string.Join("&", queryParams.ToArray());
 
-            return await MakeRequest("top-headlines", querystring);
-        }
-
-        /// <summary>
-        /// Query the /v2/top-headlines endpoint for live top news headlines.
-        /// </summary>
-        /// <param name="request">The params and filters for the request.</param>
-        /// <returns></returns>
-        public ArticlesResult GetTopHeadlines(TopHeadlinesRequest request)
-        {
-            return GetTopHeadlinesAsync(request).Result;
-        }
-
-        /// <summary>
-        /// Query the /v2/everything endpoint for recent articles all over the web.
-        /// </summary>
-        /// <param name="request">The params and filters for the request.</param>
-        /// <returns></returns>
-        public async Task<ArticlesResult> GetEverythingAsync(EverythingRequest request)
-        {
-            // build the querystring
-            var queryParams = new List<string>();
-
-            // q
-            if (!string.IsNullOrWhiteSpace(request.Q))
-            {
-                queryParams.Add("q=" + request.Q);
-            }
-
-            // sources
-            if (request.Sources.Count > 0)
-            {
-                queryParams.Add("sources=" + string.Join(",", request.Sources));
-            }
-
-            // domains
-            if (request.Domains.Count > 0)
-            {
-                queryParams.Add("domains=" + string.Join(",", request.Sources));
-            }
-
-            // from
-            if (request.From.HasValue)
-            {
-                queryParams.Add("from=" + string.Format("{0:s}", request.From.Value));
-            }
-
-            // to
-            if (request.To.HasValue)
-            {
-                queryParams.Add("to=" + string.Format("{0:s}", request.To.Value));
-            }
-
-            // language
-            if (request.Language.HasValue)
-            {
-                queryParams.Add("language=" + request.Language.Value.ToString().ToLowerInvariant());
-            }
-
-            // sortBy
-            if (request.SortBy.HasValue)
-            {
-                queryParams.Add("sortBy=" + request.SortBy.Value.ToString());
-            }
-
-            // page
-            if (request.Page > 1)
-            {
-                queryParams.Add("page=" + request.Page);
-            }
-
-            // page size
-            if (request.PageSize > 0)
-            {
-                queryParams.Add("pageSize=" + request.PageSize);
-            }
-
-            // join them together
-            var querystring = string.Join("&", queryParams.ToArray());
-
-            return await MakeRequest("everything", querystring);
-        }
-
-        /// <summary>
-        /// Query the /v2/everything endpoint for recent articles all over the web.
-        /// </summary>
-        /// <param name="request">The params and filters for the request.</param>
-        /// <returns></returns>
-        public ArticlesResult GetEverything(EverythingRequest request)
-        {
-            return GetEverythingAsync(request).Result;
+            return await MakeRequest("top-headlines", queryString).ConfigureAwait(false);
         }
 
         // ***
 
-        private async Task<ArticlesResult> MakeRequest(string endpoint, string querystring)
+        private async Task<ArticlesResult> MakeRequest(string endpoint, string queryString)
         {
             // here's the return obj
             var articlesResult = new ArticlesResult();
 
             // make the http request
-            var httpRequest = new HttpRequestMessage(HttpMethod.Get, BASE_URL + endpoint + "?" + querystring);
-            var httpResponse = await HttpClient.SendAsync(httpRequest);            
+            var httpRequest = new HttpRequestMessage(HttpMethod.Get, BaseUrl + endpoint + "?" + queryString);
+            var httpResponse = await _httpClient.SendAsync(httpRequest).ConfigureAwait(false);
 
-            var json = await httpResponse.Content?.ReadAsStringAsync();
-            if (!string.IsNullOrWhiteSpace(json))
+            if (httpResponse.Content != null)
             {
-                // convert the json to an obj
-                var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(json);
-                articlesResult.Status = apiResponse.Status;
-                if (articlesResult.Status == Statuses.Ok)
+                var json = await (httpResponse.Content.ReadAsStringAsync()).ConfigureAwait(false);
+
+                if (!string.IsNullOrWhiteSpace(json))
                 {
-                    articlesResult.TotalResults = apiResponse.TotalResults;
-                    articlesResult.Articles = apiResponse.Articles;
+                    // convert the json to an obj
+                    var apiResponse = JsonConvert.DeserializeObject<ApiResponse>(json);
+                    articlesResult.Status = apiResponse.Status;
+
+                    if (articlesResult.Status == Statuses.Ok)
+                    {
+                        articlesResult.TotalResults = apiResponse.TotalResults;
+                        articlesResult.Articles = apiResponse.Articles;
+                    }
+                    else
+                    {
+                        var errorCode = ErrorCodes.UnknownError;
+
+                        try
+                        {
+                            if (apiResponse.Code != null)
+                            {
+                                errorCode = (ErrorCodes) apiResponse.Code;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            Debug.WriteLine("The API returned an error code that wasn't expected: " + apiResponse.Code);
+                        }
+
+                        articlesResult.Error = new Error
+                        {
+                            Code = errorCode,
+                            Message = apiResponse.Message
+                        };
+                    }
                 }
                 else
                 {
-                    ErrorCodes errorCode = ErrorCodes.UnknownError;
-                    try
-                    {
-                        errorCode = (ErrorCodes)apiResponse.Code;
-                    }
-                    catch (Exception)
-                    {
-                        Debug.WriteLine("The API returned an error code that wasn't expected: " + apiResponse.Code);
-                    }
-
+                    articlesResult.Status = Statuses.Error;
                     articlesResult.Error = new Error
                     {
-                        Code = errorCode,
-                        Message = apiResponse.Message
+                        Code = ErrorCodes.UnexpectedError,
+                        Message = "The API returned an empty response. Are you connected to the internet?"
                     };
                 }
-            }
-            else
-            {
-                articlesResult.Status = Statuses.Error;
-                articlesResult.Error = new Error
-                {
-                    Code = ErrorCodes.UnexpectedError,
-                    Message = "The API returned an empty response. Are you connected to the internet?"
-                };
             }
 
             return articlesResult;
