@@ -116,7 +116,7 @@ namespace NewsAPI
             }
 
             // qInTitle
-            if (!string.IsNullOrWhiteSpace(request.Q))
+            if (!string.IsNullOrWhiteSpace(request.QInTitle))
             {
                 queryParams.Add("qInTitle=" + request.QInTitle);
             }
