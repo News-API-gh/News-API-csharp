@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NewsAPI.Models;
-using System.Configuration;
 using NewsAPI.Constants;
+using NewsAPI.Models;
 
 namespace NewsAPI.Tests
 {

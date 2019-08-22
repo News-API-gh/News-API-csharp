@@ -1,9 +1,6 @@
 ﻿using NewsAPI.Constants;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsAPI.Models
 {
@@ -16,6 +13,10 @@ namespace NewsAPI.Models
         /// The keyword or phrase to search for. Boolean operators are supported.
         /// </summary>
         public string Q { get; set; }
+        /// <summary>
+        /// Keywords or phrases to search for in the article title only.
+        /// </summary>
+        public string QInTitle { get; set; }       
         /// <summary>
         /// If you want to restrict the search to specific sources, add their Ids here. You can find source Ids with the /sources endpoint or on newsapi.org.
         /// </summary>

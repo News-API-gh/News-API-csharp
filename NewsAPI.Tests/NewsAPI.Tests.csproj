@@ -55,15 +55,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NewsAPI\NewsAPI.csproj">
-      <Project>{86cdf033-3cae-4845-98bf-70575df27e2b}</Project>
-      <Name>NewsAPI</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NewsAPI\NewsAPI.csproj">
+      <Project>{7bef9405-9be3-4199-be20-346689315972}</Project>
+      <Name>NewsAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
