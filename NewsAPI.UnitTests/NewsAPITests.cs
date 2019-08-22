@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewsAPI.Constants;
 using NewsAPI.Models;
+using System;
+using System.Collections.Generic;
+using Xunit;
 
-namespace NewsAPI.Tests
+namespace NewsAPI.UnitTests
 {
-    [TestClass]
-    public class Tests
+    public class NewsAPITests
     {
-        // FIRST: Set your API key in the config file
-
         private NewsApiClient NewsApiClient;
 
-        [TestInitialize]
-        public void Init()
+        public NewsAPITests()
         {
             // set this
             var apiKey = Environment.GetEnvironmentVariable("NewsAPIKey");
             NewsApiClient = new NewsApiClient(apiKey);
         }
 
-        [TestMethod]
+        [Fact]
         public void BasicEverythingRequestWorks()
         {
             var everythingRequest = new EverythingRequest
@@ -31,13 +27,13 @@ namespace NewsAPI.Tests
 
             var result = NewsApiClient.GetEverything(everythingRequest);
 
-            Assert.AreEqual(Statuses.Ok, result.Status);
-            Assert.IsTrue(result.TotalResults > 0);
-            Assert.IsTrue(result.Articles.Count > 0);
-            Assert.IsNull(result.Error);
+            Assert.Equal(Statuses.Ok, result.Status);
+            Assert.True(result.TotalResults > 0);
+            Assert.True(result.Articles.Count > 0);
+            Assert.Null(result.Error);
         }
 
-        [TestMethod]
+        [Fact]
         public void EverythingRequestWithDomainsWorks()
         {
             var everythingRequest = new EverythingRequest
@@ -47,13 +43,13 @@ namespace NewsAPI.Tests
 
             var result = NewsApiClient.GetEverything(everythingRequest);
 
-            Assert.AreEqual(Statuses.Ok, result.Status);
-            Assert.IsTrue(result.TotalResults > 0);
-            Assert.IsTrue(result.Articles.Count > 0);
-            Assert.IsNull(result.Error);
+            Assert.Equal(Statuses.Ok, result.Status);
+            Assert.True(result.TotalResults > 0);
+            Assert.True(result.Articles.Count > 0);
+            Assert.Null(result.Error);
         }
-        
-        [TestMethod]
+
+        [Fact]
         public void ComplexEverythingRequestWorks()
         {
             var everythingRequest = new EverythingRequest
@@ -65,13 +61,13 @@ namespace NewsAPI.Tests
 
             var result = NewsApiClient.GetEverything(everythingRequest);
 
-            Assert.AreEqual(Statuses.Ok, result.Status);
-            Assert.IsTrue(result.TotalResults > 0);
-            Assert.IsTrue(result.Articles.Count > 0);
-            Assert.IsNull(result.Error);
+            Assert.Equal(Statuses.Ok, result.Status);
+            Assert.True(result.TotalResults > 0);
+            Assert.True(result.Articles.Count > 0);
+            Assert.Null(result.Error);
         }
 
-        [TestMethod]
+        [Fact]
         public void BadEverythingRequestReturnsError()
         {
             var everythingRequest = new EverythingRequest
@@ -83,13 +79,13 @@ namespace NewsAPI.Tests
 
             var result = brokenClient.GetEverything(everythingRequest);
 
-            Assert.AreEqual(Statuses.Error, result.Status);
-            Assert.IsNull(result.Articles);
-            Assert.IsNotNull(result.Error);
-            Assert.AreEqual(ErrorCodes.ApiKeyInvalid, result.Error.Code);
+            Assert.Equal(Statuses.Error, result.Status);
+            Assert.Null(result.Articles);
+            Assert.NotNull(result.Error);
+            Assert.Equal(ErrorCodes.ApiKeyInvalid, result.Error.Code);
         }
 
-        [TestMethod]
+        [Fact]
         public void BasicTopHeadlinesRequestWorks()
         {
             var topHeadlinesRequest = new TopHeadlinesRequest();
@@ -98,13 +94,13 @@ namespace NewsAPI.Tests
 
             var result = NewsApiClient.GetTopHeadlines(topHeadlinesRequest);
 
-            Assert.AreEqual(Statuses.Ok, result.Status);
-            Assert.IsTrue(result.TotalResults > 0);
-            Assert.IsTrue(result.Articles.Count > 0);
-            Assert.IsNull(result.Error);
+            Assert.Equal(Statuses.Ok, result.Status);
+            Assert.True(result.TotalResults > 0);
+            Assert.True(result.Articles.Count > 0);
+            Assert.Null(result.Error);
         }
 
-        [TestMethod]
+        [Fact]
         public void BadTopHeadlinesRequestReturnsError()
         {
             var topHeadlinesRequest = new TopHeadlinesRequest();
@@ -115,13 +111,13 @@ namespace NewsAPI.Tests
 
             var result = brokenClient.GetTopHeadlines(topHeadlinesRequest);
 
-            Assert.AreEqual(Statuses.Error, result.Status);
-            Assert.IsNull(result.Articles);
-            Assert.IsNotNull(result.Error);
-            Assert.AreEqual(ErrorCodes.ApiKeyInvalid, result.Error.Code);
+            Assert.Equal(Statuses.Error, result.Status);
+            Assert.Null(result.Articles);
+            Assert.NotNull(result.Error);
+            Assert.Equal(ErrorCodes.ApiKeyInvalid, result.Error.Code);
         }
 
-        [TestMethod]
+        [Fact]
         public void BadTopHeadlinesRequestReturnsError2()
         {
             var topHeadlinesRequest = new TopHeadlinesRequest();
@@ -132,10 +128,10 @@ namespace NewsAPI.Tests
 
             var result = NewsApiClient.GetTopHeadlines(topHeadlinesRequest);
 
-            Assert.AreEqual(Statuses.Error, result.Status);
-            Assert.IsNull(result.Articles);
-            Assert.IsNotNull(result.Error);
-            Assert.AreEqual(ErrorCodes.ParametersIncompatible, result.Error.Code);
+            Assert.Equal(Statuses.Error, result.Status);
+            Assert.Null(result.Articles);
+            Assert.NotNull(result.Error);
+            Assert.Equal(ErrorCodes.ParametersIncompatible, result.Error.Code);
         }
     }
 }
