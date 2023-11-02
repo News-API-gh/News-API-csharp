@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewsAPI.Constants;
 using NewsAPI.Models;
-using System;
+using System.Configuration;
 
 namespace NewsAPI.Tests
 {
@@ -16,7 +16,7 @@ namespace NewsAPI.Tests
         public void Init()
         {
             // set this
-            var apiKey = Environment.GetEnvironmentVariable("NewsAPIKey");
+            var apiKey = ConfigurationManager.AppSettings["apiKey"];
             NewsApiClient = new NewsApiClient(apiKey);
         }
 
@@ -41,10 +41,10 @@ namespace NewsAPI.Tests
         {
             var everythingRequest = new EverythingRequest
             {
-                Q = "apple",
+                Q = "space",
                 SortBy = SortBys.PublishedAt,
                 Language = Languages.EN,
-                SearchIn = { NewsSections.Description }
+                SearchIn = { NewsSections.Description, NewsSections.Title }
             };
 
             var result = NewsApiClient.GetEverything(everythingRequest);
