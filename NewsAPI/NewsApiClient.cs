@@ -52,6 +52,12 @@ namespace NewsAPI
                 queryParams.Add("q=" + request.Q);
             }
 
+            // searchIn
+            if (request.SearchIn.Count > 0)
+            {
+                queryParams.Add("searchIn=" + string.Join(",", request.SearchIn.ToString().ToLowerInvariant()));
+            }
+
             // sources
             if (request.Sources.Count > 0)
             {
