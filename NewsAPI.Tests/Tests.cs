@@ -1,8 +1,7 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NewsAPI.Models;
-using System.Configuration;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NewsAPI.Constants;
+using NewsAPI.Models;
+using System;
 
 namespace NewsAPI.Tests
 {
@@ -44,7 +43,8 @@ namespace NewsAPI.Tests
             {
                 Q = "apple",
                 SortBy = SortBys.PublishedAt,
-                Language = Languages.EN
+                Language = Languages.EN,
+                SearchIn = { NewsSections.Description }
             };
 
             var result = NewsApiClient.GetEverything(everythingRequest);
