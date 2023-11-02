@@ -1,5 +1,6 @@
 ﻿using NewsAPI.Constants;
 using NewsAPI.Models;
+using NewsAPI.Models.Requests;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NewsAPI
@@ -44,51 +44,16 @@ namespace NewsAPI
         public async Task<ArticlesResult> GetTopHeadlinesAsync(TopHeadlinesRequest request)
         {
             // build the querystring
-            var queryParams = new List<string>();
-
-            // q
-            if (!string.IsNullOrWhiteSpace(request.Q))
-            {
-                queryParams.Add("q=" + request.Q);
-            }
-
-            // searchIn
-            if (request.SearchIn.Count > 0)
-            {
-                queryParams.Add("searchIn=" + string.Join(",", request.SearchIn.ToString().ToLowerInvariant()));
-            }
-
-            // sources
-            if (request.Sources.Count > 0)
-            {
-                queryParams.Add("sources=" + string.Join(",", request.Sources));
-            }
+            var queryParams = GetBase(request);
 
             if (request.Category.HasValue)
             {
                 queryParams.Add("category=" + request.Category.Value.ToString().ToLowerInvariant());
             }
 
-            if (request.Language.HasValue)
-            {
-                queryParams.Add("language=" + request.Language.Value.ToString().ToLowerInvariant());
-            }
-
             if (request.Country.HasValue)
             {
                 queryParams.Add("country=" + request.Country.Value.ToString().ToLowerInvariant());
-            }
-
-            // page
-            if (request.Page > 1)
-            {
-                queryParams.Add("page=" + request.Page);
-            }
-
-            // page size
-            if (request.PageSize > 0)
-            {
-                queryParams.Add("pageSize=" + request.PageSize);
             }
 
             // join them together
@@ -107,6 +72,8 @@ namespace NewsAPI
             return GetTopHeadlinesAsync(request).Result;
         }
 
+        
+
         /// <summary>
         /// Query the /v2/everything endpoint for recent articles all over the web.
         /// </summary>
@@ -115,19 +82,7 @@ namespace NewsAPI
         public async Task<ArticlesResult> GetEverythingAsync(EverythingRequest request)
         {
             // build the querystring
-            var queryParams = new List<string>();
-
-            // q
-            if (!string.IsNullOrWhiteSpace(request.Q))
-            {
-                queryParams.Add("q=" + request.Q);
-            }
-
-            // sources
-            if (request.Sources.Count > 0)
-            {
-                queryParams.Add("sources=" + string.Join(",", request.Sources));
-            }
+            var queryParams = GetBase(request);
 
             // domains
             if (request.Domains.Count > 0)
@@ -147,28 +102,10 @@ namespace NewsAPI
                 queryParams.Add("to=" + string.Format("{0:s}", request.To.Value));
             }
 
-            // language
-            if (request.Language.HasValue)
-            {
-                queryParams.Add("language=" + request.Language.Value.ToString().ToLowerInvariant());
-            }
-
             // sortBy
             if (request.SortBy.HasValue)
             {
                 queryParams.Add("sortBy=" + request.SortBy.Value.ToString());
-            }
-
-            // page
-            if (request.Page > 1)
-            {
-                queryParams.Add("page=" + request.Page);
-            }
-
-            // page size
-            if (request.PageSize > 0)
-            {
-                queryParams.Add("pageSize=" + request.PageSize);
             }
 
             // join them together
@@ -185,6 +122,49 @@ namespace NewsAPI
         public ArticlesResult GetEverything(EverythingRequest request)
         {
             return GetEverythingAsync(request).Result;
+        }
+
+        private List<string> GetBase(BaseRequest request)
+        {
+            var queryParams = new List<string>();
+
+            // q
+            if (!string.IsNullOrWhiteSpace(request.Q))
+            {
+                queryParams.Add("q=" + request.Q);
+            }
+
+            // searchIn
+            if (request.SearchIn.Count > 0)
+            {
+                queryParams.Add("searchIn=" + string.Join(",", request.SearchIn.Select(a => a.m_Name)));
+            }
+
+            // sources
+            if (request.Sources.Count > 0)
+            {
+                queryParams.Add("sources=" + string.Join(",", request.Sources));
+            }
+
+            // language
+            if (request.Language.HasValue)
+            {
+                queryParams.Add("language=" + request.Language.Value.ToString().ToLowerInvariant());
+            }
+
+            // page
+            if (request.Page > 1)
+            {
+                queryParams.Add("page=" + request.Page);
+            }
+
+            // page size
+            if (request.PageSize > 0)
+            {
+                queryParams.Add("pageSize=" + request.PageSize);
+            }
+
+            return queryParams;
         }
 
         // ***
